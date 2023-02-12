@@ -31,7 +31,7 @@ const useStyles = createStyles((theme) => ({
     transition: 'background-color 100ms ease',
 
     '&:hover': {
-      backgroundColor: '#0F1F54', //theme.colors.blue[1],
+      backgroundColor: '#1983AD', //theme.colors.blue[1],
     },
 
     [theme.fn.smallerThan('xs')]: {
@@ -82,7 +82,7 @@ export default function UserMenu() {
                   borderRadius: 100,
                   '& .mantine-Menu-item': {},
                 }}
-                icon={<IconUserCheck color='#0F1F54' />}
+                icon={<IconUserCheck color='#1983AD' />}
               />
             </Text>
           </Group>

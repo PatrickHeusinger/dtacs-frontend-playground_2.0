@@ -1,6 +1,6 @@
-import { AppShell } from '@mantine/core';
+import { AppShell, Footer } from '@mantine/core';
 import { Outlet } from 'react-router-dom';
-
+import AppFooter from "common/AppFooter";
 import Header from 'common/Header';
 
 export default function MainFrame() {
@@ -8,6 +8,11 @@ export default function MainFrame() {
     <AppShell
       padding={0}
       header={<Header />}
+      footer={
+          <Footer height={80} p="xs">
+              {<AppFooter />}
+          </Footer>
+      }
       styles={(theme) => ({
         header: {
           backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],

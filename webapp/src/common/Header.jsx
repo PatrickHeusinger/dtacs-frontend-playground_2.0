@@ -1,6 +1,6 @@
-import {createStyles, Header, Group, Box, Text, Title} from '@mantine/core';
+import {createStyles, Header, Group, Box, Image, Title} from '@mantine/core';
 import {useLocation, Link} from 'react-router-dom';
-
+import Logo from 'assets/dt_logo2.png';
 import UserMenu from 'features/auth/user/UserMenu';
 
 const HEADER_HEIGHT = 84;
@@ -52,7 +52,7 @@ const useStyles = createStyles((theme) => ({
         textDecoration: 'none',
 
         '&:hover': {
-            color: '#0F1F54', //theme.colorScheme === 'dark' ? theme.white : theme.black,
+            color: '#1983AD', //theme.colorScheme === 'dark' ? theme.white : theme.black,
             textDecoration: 'none',
         },
     },
@@ -70,8 +70,8 @@ const useStyles = createStyles((theme) => ({
     },
 
     mainLinkActive: {
-        color: '#0F1F54', //theme.colorScheme === 'dark' ? theme.white : theme.black,
-        borderBottomColor: '#0F1F54', //theme.colors[theme.primaryColor][theme.colorScheme === 'dark' ? 5 : 6],
+        color: '#1983AD', //theme.colorScheme === 'dark' ? theme.white : theme.black,
+        borderBottomColor: '#1983AD', //theme.colors[theme.primaryColor][theme.colorScheme === 'dark' ? 5 : 6],
     },
 }));
 
@@ -99,7 +99,8 @@ export default function CustomHeader() {
     ));
 
     return (
-        <Header sx={{color: '#0F1F54'}} height={HEADER_HEIGHT} mb={120}>
+        <Header sx={{color:'#1883AD'}} height={HEADER_HEIGHT} mb={120}>
+
             <Box className={classes.inner}>
                 <Box className={classes.left}>
                     <Box sx={{
@@ -108,7 +109,7 @@ export default function CustomHeader() {
                         flexDirection: 'column',
                         paddingLeft: '20px'
                     }}>
-                        <Title sx={{fontSize: '18px', paddingBottom: '5px'}}>{process.env.REACT_APP_NAME}</Title>
+                        <Image width={200} src={Logo} />
                     </Box>
                 </Box>
                 <Group spacing={0} position='right' className={classes.mainLinks}>
