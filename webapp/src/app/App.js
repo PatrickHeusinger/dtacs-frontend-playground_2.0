@@ -22,7 +22,7 @@ export default function App() {
         <Routes>
             <Route exact={true} path={loginPath} element={<LoginPage/>}/>
             <Route path='/' element={<Wrapper/>}>
-                <Route path='/start' element={<Start/>}/>
+                <Route path='/' element={<Start/>}/>
                 <Route path='/charts' element={<Chart/>}/>
                 <Route path='/upload' element={<Upload/>}/>
                 <Route path='/demo' element={<Demo/>}/>

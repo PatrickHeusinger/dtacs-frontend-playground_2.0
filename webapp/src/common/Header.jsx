@@ -80,7 +80,7 @@ export default function CustomHeader() {
     const location = useLocation();
 
     const mainLinks = [
-        {link: '/start', label: 'Start'},
+        {link: '/', label: 'Start'},
         {link: '/upload', label: 'Upload'},
         {link: '/charts', label: 'Charts'},
         {link: '/demo', label: 'Demo'},
