@@ -1,38 +1,38 @@
-import { useSeidrAuth } from 'seidr-react';
-import { Navigate, Route, Routes } from 'react-router-dom';
-
+import {useSeidrAuth} from 'seidr-react';
+import {Navigate, Route, Routes} from 'react-router-dom';
+import "./App.css"
 import LoginPage from '../features/auth/user/LoginPage';
 import MainFrame from '../common/MainFrame';
 import Demo from '../features/demo/Demo';
 import Start from "../features/start/Start";
 import Upload from "../features/upload/Upload";
 import Chart from "../features/charts/Chart";
-import { Permissions, PermissionView, Roles, Users, ViewsMenus } from '../features/auth/security';
+import {Permissions, PermissionView, Roles, Users, ViewsMenus} from '../features/auth/security';
 
 const loginPath = '/login';
 
 function Wrapper() {
-  const { user, loading } = useSeidrAuth();
-  if (loading) return;
-  return user ? <MainFrame /> : <Navigate to={loginPath} />;
+    const {user, loading} = useSeidrAuth();
+    if (loading) return;
+    return user ? <MainFrame/> : <Navigate to={loginPath}/>;
 }
 
 export default function App() {
-  return (
-    <Routes>
-      <Route exact={true} path={loginPath} element={<LoginPage />} />
-      <Route path='/' element={<Wrapper />}>
-        <Route path='/start' element={<Start />} />
-          <Route path='/charts' element={<Chart />} />
-          <Route path='/upload' element={<Upload />} />
-          <Route path='/demo' element={<Demo />} />
-        <Route path='/security/permissions' element={<Permissions />} />
-        <Route path='/security/permissionview' element={<PermissionView />} />
-        <Route path='/security/users' element={<Users />} />
-        <Route path='/security/roles' element={<Roles />} />
-        <Route path='/security/viewsmenus' element={<ViewsMenus />} />
-      </Route>
-      <Route path='*' element={<Navigate to='/' />} />
-    </Routes>
-  );
+    return (
+        <Routes>
+            <Route exact={true} path={loginPath} element={<LoginPage/>}/>
+            <Route path='/' element={<Wrapper/>}>
+                <Route path='/start' element={<Start/>}/>
+                <Route path='/charts' element={<Chart/>}/>
+                <Route path='/upload' element={<Upload/>}/>
+                <Route path='/demo' element={<Demo/>}/>
+                <Route path='/security/permissions' element={<Permissions/>}/>
+                <Route path='/security/permissionview' element={<PermissionView/>}/>
+                <Route path='/security/users' element={<Users/>}/>
+                <Route path='/security/roles' element={<Roles/>}/>
+                <Route path='/security/viewsmenus' element={<ViewsMenus/>}/>
+            </Route>
+            <Route path='*' element={<Navigate to='/'/>}/>
+        </Routes>
+    );
 }
