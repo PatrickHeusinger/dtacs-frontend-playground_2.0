@@ -4,12 +4,11 @@ import {
     XAxis,
     YAxis,
     CartesianGrid,
-    Tooltip,
     Legend,
     LabelList
 } from "recharts";
 import { Box } from "@mantine/core";
-import React, {FunctionComponent} from "react";
+import React from "react";
 const series = [
     {
         name: "Group",
@@ -60,24 +59,26 @@ const CustomizedLabel = (props) => {
 
 export default function Chart() {
     return (
-        <Box p={40} mt={120} sx={{display:'flex', justifyContent:'center' }}>
-            <LineChart width={800} height={400}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis
-                    dataKey="category"
-                    type="category"
-                    allowDuplicatedCategory={false}
-                />
-                <YAxis dataKey="value" />
-                {/*<Tooltip />*/}
-                <Legend />
+        <Box sx={{display:'flex', justifyContent:'center', height: '100%' }}>
+            <Box sx={{display:'flex', justifyContent:'center',alignItems:'center'}}>
+                <LineChart width={800} height={400}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis
+                        dataKey="category"
+                        type="category"
+                        allowDuplicatedCategory={false}
+                    />
+                    <YAxis dataKey="value" />
+                    {/*<Tooltip />*/}
+                    <Legend />
 
-                {series.map((s) => (
-                    <Line dataKey="value" data={s.data} name={s.name} key={s.name} stroke={s.stroke} >
-                        <LabelList content={<CustomizedLabel />} />
-                    </Line>
-                ))}
-            </LineChart>
+                    {series.map((s) => (
+                        <Line dataKey="value" data={s.data} name={s.name} key={s.name} stroke={s.stroke} >
+                            <LabelList content={<CustomizedLabel />} />
+                        </Line>
+                    ))}
+                </LineChart>
+            </Box>
         </Box>
     );
 }
