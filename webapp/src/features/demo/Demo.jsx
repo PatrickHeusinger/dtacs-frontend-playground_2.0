@@ -7,10 +7,9 @@ export default function Demo() {
   const dispatch = useDispatch();
   const { selectedFilter } = useSelector((state) => {
     return { selectedFilter: state.MainPage.selectedFilter };
-
   });
 
-  let label = ['react', 'svelte', 'angular', 'vue', 'flask'];
+  let label = ['react', 'svelte', 'angular', 'vue', 'flask', 'django', 'seidr-react'];
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', height: '100%' }}>

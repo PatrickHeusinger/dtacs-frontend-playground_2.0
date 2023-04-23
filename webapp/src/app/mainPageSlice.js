@@ -13,8 +13,6 @@ export const mainPageSlice = createSlice({
   },
 });
 
-export const {
-  setSelectedFilter,
-} = mainPageSlice.actions;
+export const { setSelectedFilter } = mainPageSlice.actions;
 
 export default mainPageSlice.reducer;
