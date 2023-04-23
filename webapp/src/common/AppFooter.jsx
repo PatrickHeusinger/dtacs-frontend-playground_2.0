@@ -1,4 +1,4 @@
-import { createStyles, Anchor, Group, ActionIcon, Image, Text } from "@mantine/core";
+import { createStyles, Group, Image, Text } from "@mantine/core";
 import Logo from 'assets/dt_logo_xl.png';
 const useStyles = createStyles((theme) => ({
     footer: {

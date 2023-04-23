@@ -1,4 +1,4 @@
-import {createStyles, Header, Group, Box, Image, Title} from '@mantine/core';
+import {createStyles, Header, Group, Box, Image } from '@mantine/core';
 import {useLocation, Link} from 'react-router-dom';
 import Logo from 'assets/dt_logo2.png';
 import UserMenu from 'features/auth/user/UserMenu';
@@ -86,7 +86,7 @@ export default function CustomHeader() {
         {link: '/demo', label: 'Demo'},
     ];
 
-    const mainItems = mainLinks.map((item, index) => (
+    const mainItems = mainLinks.map((item) => (
         <Box
             component={Link}
             to={item.link}
