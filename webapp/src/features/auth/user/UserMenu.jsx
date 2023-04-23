@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSeidrAuth } from 'seidr-react';
 
-import { Group, Menu, Text, UnstyledButton, createStyles } from '@mantine/core';
+import {Group, Menu, Text, createStyles, Box} from '@mantine/core';
 import {
   IconUserCheck,
   IconAppWindow,
@@ -29,18 +29,13 @@ const useStyles = createStyles((theme) => ({
     color: theme.black,
     borderRadius: 100,
     transition: 'background-color 100ms ease',
-
-    '&:hover': {
-      backgroundColor: '#1983AD', //theme.colors.blue[1],
-    },
-
     [theme.fn.smallerThan('xs')]: {
       display: 'none',
     },
   },
 
   userActive: {
-    backgroundColor: theme.colors.gray[5],
+   // backgroundColor: theme.colors.gray[5],
   },
 }));
 
@@ -71,7 +66,7 @@ export default function UserMenu() {
       onOpen={() => setUserMenuOpened(true)}
     >
       <Menu.Target sx={{ height: 50, width: 50, marginRight: 30, marginLeft: 20, paddingLeft: '5px' }}>
-        <UnstyledButton className={cx(classes.user, { [classes.userActive]: userMenuOpened })}>
+        <Box className={cx(classes.user, { [classes.userActive]: userMenuOpened })}>
           <Group sx={{ width: 40, height: 40 }} spacing={7}>
             <Text weight={500} size='sm' sx={{ lineHeight: 1 }} mr={0}>
               <Menu.Item
@@ -86,7 +81,7 @@ export default function UserMenu() {
               />
             </Text>
           </Group>
-        </UnstyledButton>
+        </Box>
       </Menu.Target>
       <Menu.Dropdown>
         <Menu.Label>Security</Menu.Label>

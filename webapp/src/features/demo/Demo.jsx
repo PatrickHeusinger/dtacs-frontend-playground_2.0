@@ -1,5 +1,7 @@
 import {Box, Stack, Title} from '@mantine/core';
+import { nanoid } from '@reduxjs/toolkit'
 
+console.log(nanoid())
 
 
 export default function Demo() {
