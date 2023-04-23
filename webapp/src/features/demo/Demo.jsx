@@ -10,10 +10,10 @@ export default function Demo() {
 
   });
 
-  console.log(nanoid());
-  console.log(selectedFilter);
+ // console.log(nanoid());
+ // console.log(selectedFilter);
 
-  const label = ['react', 'svelte', 'angular', 'vue', 'flask'];
+  let label = ['react', 'svelte', 'angular', 'vue', 'flask'];
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', height: '100%' }}>
