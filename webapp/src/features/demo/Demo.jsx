@@ -3,18 +3,17 @@ import { nanoid } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedFilter } from '../../app/mainPageSlice';
 
-console.log(nanoid());
-
-
 export default function Demo() {
   const dispatch = useDispatch();
   const { selectedFilter } = useSelector((state) => {
     return { selectedFilter: state.MainPage.selectedFilter };
 
   });
+
+  console.log(nanoid());
   console.log(selectedFilter);
 
-  const items = ['react', 'svelte', 'angular', 'vue', 'flask'];
+  const label = ['react', 'svelte', 'angular', 'vue', 'flask'];
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', height: '100%' }}>
@@ -29,11 +28,10 @@ export default function Demo() {
               dispatch(setSelectedFilter(event));
             }
           }
-
         >
           <Group mt='xs'>
             {
-              items.map((value) => (
+              label.map((value) => (
 
                 <Checkbox key={nanoid()} value={value} label={value.toUpperCase()} />
 
