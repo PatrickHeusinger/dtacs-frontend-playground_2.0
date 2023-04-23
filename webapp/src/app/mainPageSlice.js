@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const mainPageSlice = createSlice({
     name: 'MainPage',
     initialState: {
-        selectedFilter: [],
+        selectedFilter: ['react'],
     },
 
     reducers: {

@@ -29,7 +29,7 @@ export default function Demo() {
                   <Group mt="xs">
                       <Checkbox value="react" label="React" />
                       <Checkbox value="svelte" label="Svelte" />
-                      <Checkbox value="ng" label="Angular" />
+                      <Checkbox value="angular" label="Angular" />
                       <Checkbox value="vue" label="Vue" />
                   </Group>
               </Checkbox.Group>
