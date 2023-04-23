@@ -1,20 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export const mainPageSlice = createSlice({
-    name: 'MainPage',
-    initialState: {
-        selectedFilter: ['react'],
-    },
+  name: 'MainPage',
+  initialState: {
+    selectedFilter: ['react'],
+  },
 
-    reducers: {
-        setSelectedFilter: (state, action) => {
-            state.selectedFilter = action.payload;
-        },
+  reducers: {
+    setSelectedFilter: (state, action) => {
+      state.selectedFilter = action.payload;
     },
+  },
 });
 
 export const {
-    setSelectedFilter,
+  setSelectedFilter,
 } = mainPageSlice.actions;
 
 export default mainPageSlice.reducer;
