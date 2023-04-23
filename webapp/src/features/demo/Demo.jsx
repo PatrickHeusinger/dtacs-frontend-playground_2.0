@@ -10,9 +10,6 @@ export default function Demo() {
 
   });
 
- // console.log(nanoid());
- // console.log(selectedFilter);
-
   let label = ['react', 'svelte', 'angular', 'vue', 'flask'];
 
   return (
