@@ -42,11 +42,6 @@ export default function SessionTimeout() {
     }
   }, [seconds, signout, remainSeconds, intervalId]);
 
-  const handleClose = () => {
-    setSeconds(HALF_HOUR_IN_SECONDS);
-    setOpen(false);
-  };
-
   const handleReset = () => {
     setSeconds(HALF_HOUR_IN_SECONDS);
     setOpen(false);
@@ -68,13 +63,13 @@ export default function SessionTimeout() {
 
   return (
     <>
-      <Modal opened={open} onClose={handleClose} withCloseButton={false} title='Session Timeout Warning' centered>
+      <Modal opened={open} onClose={handleReset} withCloseButton={false} title='Session Timeout Warning' centered>
         You will be automatically logged out when the timer expires.
         <Box pl={2}>
           <p>Timer: {minutes.toString().padStart(2, '0')}:{remainSeconds.toString().padStart(2, '0')}</p>
         </Box>
         <Group position='right'>
-          <Button onClick={handleClose}>Continue</Button>
+          <Button onClick={handleReset}>Continue</Button>
         </Group>
       </Modal>
     </>
