@@ -2,6 +2,7 @@ import { AppShell, Footer } from '@mantine/core';
 import { Outlet } from 'react-router-dom';
 import AppFooter from "common/AppFooter";
 import Header from 'common/Header';
+import SessionTimeout from '../features/logout/SessionTimeout';
 
 export default function MainFrame() {
   return (
@@ -22,6 +23,7 @@ export default function MainFrame() {
         },
       })}
     >
+      <SessionTimeout/>
       <Outlet />
     </AppShell>
   );

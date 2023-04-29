@@ -14,7 +14,8 @@ const loginPath = '/login';
 function Wrapper() {
     const {user, loading} = useSeidrAuth();
     if (loading) return;
-    return user ? <MainFrame/> : <Navigate to={loginPath}/>;
+    return user ? <MainFrame/>  : <Navigate to={loginPath}/>;
+
 }
 
 export default function App() {
