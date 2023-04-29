@@ -11,7 +11,7 @@ import { Box } from "@mantine/core";
 import React from "react";
 const series = [
     {
-        name: "Group",
+        name: "Customer 1",
         stroke: "#05164D",
         data: [
             { category: "Jan 2022", value: 1900 },
@@ -23,7 +23,7 @@ const series = [
         ]
     },
     {
-        name: "Cargo",
+        name: "Customer 2",
         stroke: "#FFAD00",
         data: [
             { category: "Jan 2022", value: 2300 },
@@ -35,7 +35,7 @@ const series = [
         ]
     },
     {
-        name: "Technik",
+        name: "Customer 3",
         stroke: "#A9DADB",
         data: [
             { category: "Jan 2022", value: 2500 },

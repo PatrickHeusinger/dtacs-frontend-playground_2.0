@@ -84,6 +84,7 @@ export default function CustomHeader() {
         {link: '/upload', label: 'Upload'},
         {link: '/charts', label: 'Chart'},
         {link: '/demo', label: 'Demo'},
+        {link: '/flow', label: 'Visualizer'},
     ];
 
     const mainItems = mainLinks.map((item) => (
