@@ -1,5 +1,6 @@
 # dtacs-frontend-playground_2.0
-### Frontend playground with backend
+
+### Features:
 
 * React Frontend
 * Python Backend
