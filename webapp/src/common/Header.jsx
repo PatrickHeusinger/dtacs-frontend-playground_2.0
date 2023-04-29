@@ -83,7 +83,7 @@ export default function CustomHeader() {
         {link: '/', label: 'Start'},
         {link: '/upload', label: 'Upload'},
         {link: '/charts', label: 'Chart'},
-        {link: '/demo', label: 'Demo'},
+        {link: '/demo', label: 'Store'},
         {link: '/flow', label: 'Visualizer'},
     ];
 
@@ -101,7 +101,6 @@ export default function CustomHeader() {
 
     return (
         <Header sx={{color:'#1883AD'}} height={HEADER_HEIGHT} mb={120}>
-
             <Box className={classes.inner}>
                 <Box className={classes.left}>
                     <Box sx={{
@@ -110,7 +109,7 @@ export default function CustomHeader() {
                         flexDirection: 'column',
                         paddingLeft: '20px'
                     }}>
-                        <Image width={200} src={Logo} />
+                        <Image component={Link} to={'/'} width={200} src={Logo} />
                     </Box>
                 </Box>
                 <Group spacing={0} position='right' className={classes.mainLinks}>
