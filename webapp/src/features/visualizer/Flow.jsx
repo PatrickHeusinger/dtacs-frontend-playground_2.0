@@ -3,7 +3,6 @@ import ReactFlow, { addEdge, ConnectionLineType, useNodesState, useEdgesState, B
 import dagre from 'dagre';
 import 'reactflow/dist/style.css';
 import { initialNodes, initialEdges } from './nodes-edges.js';
-import './index.css';
 import { Box, Card } from '@mantine/core';
 
 const dagreGraph = new dagre.graphlib.Graph();
@@ -75,7 +74,7 @@ const Flow = () => {
   );
 
   return (
-    <Box px={40} mt={25}
+    <Box px={30} mt={25}
          sx={{ height: '70vh', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '0px' }}>
       <Card
         shadow='sm'
