@@ -2,10 +2,9 @@ import React, { useCallback } from 'react';
 import ReactFlow, { addEdge, ConnectionLineType, useNodesState, useEdgesState, Background } from 'reactflow';
 import dagre from 'dagre';
 import 'reactflow/dist/style.css';
-
 import { initialNodes, initialEdges } from './nodes-edges.js';
-
 import './index.css';
+import { Box, Card } from '@mantine/core';
 
 const dagreGraph = new dagre.graphlib.Graph();
 dagreGraph.setDefaultEdgeLabel(() => ({}));
@@ -47,7 +46,7 @@ const getLayoutedElements = (nodes, edges, direction = 'TB') => {
 
 const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
   initialNodes,
-  initialEdges
+  initialEdges,
 );
 
 const Flow = () => {
@@ -57,43 +56,47 @@ const Flow = () => {
   const onConnect = useCallback(
     (params) =>
       setEdges((eds) =>
-        addEdge({ ...params, type: ConnectionLineType.SmoothStep, animated: true }, eds)
+        addEdge({ ...params, type: ConnectionLineType.SmoothStep, animated: true }, eds),
       ),
-    []
+    [],
   );
   const onLayout = useCallback(
     (direction) => {
       const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
         nodes,
         edges,
-        direction
+        direction,
       );
 
       setNodes([...layoutedNodes]);
       setEdges([...layoutedEdges]);
     },
-    [nodes, edges]
+    [nodes, edges],
   );
 
   return (
-    <div className="layoutflow">
-      <ReactFlow
-        nodes={nodes}
-        edges={edges}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
-        connectionLineType={ConnectionLineType.SmoothStep}
-        fitView
+    <Box px={40} mt={25}
+         sx={{ height: '70vh', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '0px' }}>
+      <Card
+        shadow='sm'
+        p='lg'
+        radius='md'
+        withBorder
+        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%' }}
       >
-      <div className="controls">
-        <button onClick={() => onLayout('TB')}>vertical layout</button>
-        <button onClick={() => onLayout('LR')}>horizontal layout</button>
-      </div>
-        <Background/>
-      </ReactFlow>
-    </div>
+        <ReactFlow
+          nodes={nodes}
+          edges={edges}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          onConnect={onConnect}
+          connectionLineType={ConnectionLineType.SmoothStep}
+          fitView
+        >
+          <Background />
+        </ReactFlow>
+      </Card>
+    </Box>
   );
 };
-
 export default Flow;
