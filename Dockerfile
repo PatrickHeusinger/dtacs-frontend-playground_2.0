@@ -28,7 +28,7 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR $APP_HOME
 
-RUN apt-get update && apt-get install -y postgresql-client-13  && rm -rf /var/lib/apt/lists/* && apt-get clean
+RUN apt-get update && apt-get install -y postgresql-client  && rm -rf /var/lib/apt/lists/* && apt-get clean
 
 COPY app $APP_HOME/app
 COPY --from=build-webapp /build/build $APP_HOME/app
