@@ -32,7 +32,7 @@ export default function AppFooter() {
         <div className={classes.footer}>
             <div className={classes.inner}>
                 <Image pl={10} width={40} src={Logo} />
-                <Text sx={{color:'#1983AD'}} pl={10}>Frontend Development Playground</Text>
+                <Text sx={{color:'#1983AD'}} pl={10}>Frontend Development</Text>
                 <Group className={classes.links}></Group>
             </div>
         </div>
