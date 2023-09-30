@@ -82,7 +82,6 @@ export default function CustomHeader() {
     const mainLinks = [
         {link: '/', label: 'Start'},
         {link: '/upload', label: 'Upload'},
-        {link: '/scroll', label: 'Scroll'},
         {link: '/demo', label: 'Store'},
         {link: '/flow', label: 'Visualizer'},
     ];

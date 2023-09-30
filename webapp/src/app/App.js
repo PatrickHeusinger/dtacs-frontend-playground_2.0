@@ -6,7 +6,6 @@ import MainFrame from '../common/MainFrame';
 import Demo from '../features/demo/Demo';
 import Start from '../features/start/Start';
 import Upload from '../features/upload/Upload';
-import InfiniteScrollArea from '../features/scroll/InfiniteScrollArea';
 import { Permissions, PermissionView, Roles, Users, ViewsMenus } from '../features/auth/security';
 import Flow from '../features/visualizer/Flow';
 
@@ -25,7 +24,6 @@ export default function App() {
       <Route exact={true} path={loginPath} element={<LoginPage />} />
       <Route path='/' element={<Wrapper />}>
         <Route path='/' element={<Start />} />
-        <Route path='/scroll' element={<InfiniteScrollArea />} />
         <Route path='/upload' element={<Upload />} />
         <Route path='/demo' element={<Demo />} />
         <Route path='/flow' element={<Flow />} />
