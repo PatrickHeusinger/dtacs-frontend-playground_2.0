@@ -1,6 +1,6 @@
 import React from "react";
 import {useForm} from "react-hook-form";
-import {Button, Box} from '@mantine/core';
+import {Button, Box, Title} from '@mantine/core';
 
 
 function refreshPage() {
@@ -27,15 +27,15 @@ export default function Upload() {
     return (
 
         <Box sx={{textAlign: 'center', marginTop: '30vh'}}>
-            <Box sx={{marginBottom: '50px'}}>CSV UPLOAD ONLY</Box>
+            <Title mb={20} order={1} sx={{color:'#1983AD'}}>CSV FILE UPLOADER</Title>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <Box className="file-input">
-                    <Button>
+                    <Button sx={{backgroundColor:'#1983AD'}}>
                         <input className="custom-file-input" type="file"
                                accept={".csv"}  {...register("file")}  />
                     </Button>
                 </Box>
-                <Button onClick={refreshPage} mt={20} type="submit">Upload</Button>
+                <Button sx={{backgroundColor:'#1983AD'}} onClick={refreshPage} mt={20} type="submit">Upload</Button>
             </form>
         </Box>
 
