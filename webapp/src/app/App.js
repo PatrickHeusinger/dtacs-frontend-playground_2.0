@@ -8,6 +8,7 @@ import Start from '../features/start/Start';
 import Upload from '../features/upload/Upload';
 import { Permissions, PermissionView, Roles, Users, ViewsMenus } from '../features/auth/security';
 import Flow from '../features/visualizer/Flow';
+import { Camera } from '../features/visualizer/Camera';
 
 const loginPath = '/login';
 
@@ -26,7 +27,7 @@ export default function App() {
         <Route path='/' element={<Start />} />
         <Route path='/upload' element={<Upload />} />
         <Route path='/demo' element={<Demo />} />
-        <Route path='/flow' element={<Flow />} />
+        <Route path='/flow' element={<Camera />} />
         <Route path='/security/permissions' element={<Permissions />} />
         <Route path='/security/permissionview' element={<PermissionView />} />
         <Route path='/security/users' element={<Users />} />
