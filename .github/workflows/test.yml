@@ -1,4 +1,4 @@
-name: FTP Upload
+name: SFTP Upload
 
 on:
   push:
@@ -6,23 +6,22 @@ on:
       - main
 
 jobs:
-  ftp-deploy:
+  sftp-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Upload to FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      - name: Upload to SFTP
+        uses: appleboy/scp-action@v0.1.7
         with:
-          server: ${{ secrets.FTP_SERVER }}
+          host: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: sftp
           port: 22
-          server-dir: /test/
-          local-dir: ./
-          dangerous-clean-slate: false
-          log-level: verbose
+          source: "./"
+          target: "/test/"
+          rm: false
+
 
 
