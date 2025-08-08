@@ -21,8 +21,8 @@ jobs:
           FTP_USER: ${{ secrets.FTP_USERNAME }}
           FTP_PASS: ${{ secrets.FTP_PASSWORD }}
           FTP_SERVER: ssh.strato.de
-          REMOTE_DIR: "./"    # <-- hier Remote-Pfad anpassen!
-          LOCAL_DIR: "/test/"
+          LOCAL_DIR: "./test/"   # Lokales Verzeichnis im GitHub Runner
+          REMOTE_DIR: "/"        # Zielverzeichnis auf dem FTP/SFTP Server
         run: |
           echo "Remote-Verzeichnis Listing:"
           sshpass -p "$FTP_PASS" sftp -v "$FTP_USER@$FTP_SERVER" <<EOF
