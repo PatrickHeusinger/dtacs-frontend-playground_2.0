@@ -21,8 +21,8 @@ jobs:
           FTP_USER: ${{ secrets.FTP_USERNAME }}
           FTP_PASS: ${{ secrets.FTP_PASSWORD }}
           FTP_SERVER: ssh.strato.de
-          REMOTE_DIR: "/test/"    # <-- hier Remote-Pfad anpassen!
-          LOCAL_DIR: "/"
+          REMOTE_DIR: "./"    # <-- hier Remote-Pfad anpassen!
+          LOCAL_DIR: "/test/"
         run: |
           echo "Remote-Verzeichnis Listing:"
           sshpass -p "$FTP_PASS" sftp -v "$FTP_USER@$FTP_SERVER" <<EOF
