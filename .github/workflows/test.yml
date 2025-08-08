@@ -1,4 +1,3 @@
-
 name: FTP Upload via sftp with sshpass
 
 on:
@@ -16,13 +15,18 @@ jobs:
       - name: Install sshpass
         run: sudo apt-get update && sudo apt-get install -y sshpass
 
+      - name: Setup known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ssh.strato.de >> ~/.ssh/known_hosts
+
       - name: Upload files to SFTP Server
         env:
           FTP_USER: ${{ secrets.FTP_USERNAME }}
           FTP_PASS: ${{ secrets.FTP_PASSWORD }}
           FTP_SERVER: ssh.strato.de
-          LOCAL_DIR: "./test/"   # Lokales Verzeichnis im GitHub Runner
-          REMOTE_DIR: "/"        # Zielverzeichnis auf dem FTP/SFTP Server
+          LOCAL_DIR: "./test/"
+          REMOTE_DIR: "/"
         run: |
           echo "Remote-Verzeichnis Listing:"
           sshpass -p "$FTP_PASS" sftp -v "$FTP_USER@$FTP_SERVER" <<EOF
