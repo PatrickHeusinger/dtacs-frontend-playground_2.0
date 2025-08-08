@@ -1,4 +1,4 @@
-name: SFTP Upload
+name: SFTP Uploads
 
 on:
   push:
