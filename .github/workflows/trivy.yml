@@ -3,7 +3,7 @@ name: Generate SBOM
 on:
   push:
     branches:
-      - m
+      - mirror
 
 permissions:
   contents: write
@@ -37,5 +37,5 @@ jobs:
             -F "bom=@dependency-results.sbom.json"
         env:
           IMAGE: 'dt/playground'
-          TAG: 'latest-01'
+          TAG: 'latest'
           PARENTUUID: ${{ secrets.PARENT_UUID }}
