@@ -11,6 +11,7 @@ permissions:
 jobs:
   generate-sbom:
     runs-on: ubuntu-latest
+    environment: playground
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
