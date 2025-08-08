@@ -21,20 +21,20 @@ jobs:
           FTP_USER: ${{ secrets.FTP_USERNAME }}
           FTP_PASS: ${{ secrets.FTP_PASSWORD }}
           FTP_SERVER: ssh.strato.de
-          REMOTE_DIR: "/"
-          LOCAL_DIR: "./dist"
+          REMOTE_DIR: "/test/"    # <-- hier Remote-Pfad anpassen!
+          LOCAL_DIR: "/"
         run: |
-          sshpass -p "$FTP_PASS" sftp "$FTP_USER@$FTP_SERVER" <<EOF
+          echo "Remote-Verzeichnis Listing:"
+          sshpass -p "$FTP_PASS" sftp -v "$FTP_USER@$FTP_SERVER" <<EOF
           ls $REMOTE_DIR
+          bye
           EOF
-          echo "Verbindung erfolgreich hergestellt und Verzeichnis überprüft!"
-
-          echo "Lade Dateien aus $LOCAL_DIR nach $REMOTE_DIR hoch..."
-          sshpass -p "$FTP_PASS" sftp "$FTP_USER@$FTP_SERVER" <<EOF
+          
+          echo "Beginne Upload von $LOCAL_DIR nach $REMOTE_DIR..."
+          sshpass -p "$FTP_PASS" sftp -v "$FTP_USER@$FTP_SERVER" <<EOF
           lcd $LOCAL_DIR
           cd $REMOTE_DIR
           mput -r *
           bye
           EOF
-          echo "Dateien erfolgreich hochgeladen!"
-
+          echo "Upload erfolgreich abgeschlossen!"
