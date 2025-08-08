@@ -3,7 +3,7 @@ name: Generate SBOM
 on:
   push:
     branches:
-    - main
+      - main
 
 permissions:
   contents: write
@@ -22,4 +22,19 @@ jobs:
           format: 'github'
           output: 'dependency-results.sbom.json'
           scan-ref: '.'
-          github-pat: ${{ secrets.GITHUB_TOKEN }} 
+          github-pat: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload SBOM to Dependency-Track
+        run: |
+          curl -L -vX POST https://dtrack.datatactics.dev/api/v1/bom \
+            -H 'Content-Type: multipart/form-data' \
+            -H "X-API-Key: odt_531QuhvvwhYG6cywF2MtzNhNJ5o4oTQR" \
+            -F "autoCreate=true" \
+            -F "projectName=${IMAGE}" \
+            -F "projectVersion=${TAG}" \
+            -F "parentUUID=${PARENTUUID}" \
+            -F "bom=@dependency-results.sbom.json"
+        env:
+          IMAGE: ${{ github.repository }}
+          TAG: ${{ github.sha }}
+          PARENTUUID: "484f553b-1a01-41f2-922f-96af4e8b73c2"
