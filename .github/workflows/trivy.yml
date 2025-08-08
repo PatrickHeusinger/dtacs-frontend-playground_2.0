@@ -3,7 +3,7 @@ name: Generate SBOM
 on:
   push:
     branches:
-      - main
+      - m
 
 permissions:
   contents: write
