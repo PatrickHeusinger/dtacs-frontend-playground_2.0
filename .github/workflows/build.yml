@@ -1,0 +1,50 @@
+name: Build & Upload React App via SFTP
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install sshpass
+        run: sudo apt-get update && sudo apt-get install -y sshpass
+
+      - name: Setup known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ssh.strato.de >> ~/.ssh/known_hosts
+
+      - name: Install dependencies & build React app
+        working-directory: ./webapp
+        run: |
+          npm ci
+          npm run build
+
+      - name: Upload dist to SFTP Server
+        env:
+          FTP_USER: ${{ secrets.FTP_USERNAME }}
+          FTP_PASS: ${{ secrets.FTP_PASSWORD }}
+          FTP_SERVER: ssh.strato.de
+          LOCAL_DIR: "./build"
+          REMOTE_DIR: "/build_test"
+        run: |
+          echo "Remote-Verzeichnis Listing:"
+          sshpass -p "$FTP_PASS" sftp -v "$FTP_USER@$FTP_SERVER" <<EOF
+          ls $REMOTE_DIR
+          bye
+          EOF
+          
+          echo "Beginne Upload von $LOCAL_DIR nach $REMOTE_DIR..."
+          sshpass -p "$FTP_PASS" sftp -v "$FTP_USER@$FTP_SERVER" <<EOF
+          lcd $LOCAL_DIR
+          cd $REMOTE_DIR
+          mput -r *
+          bye
+          EOF
+          echo "Upload erfolgreich abgeschlossen!"
