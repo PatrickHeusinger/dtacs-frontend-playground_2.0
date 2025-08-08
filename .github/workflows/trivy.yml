@@ -28,13 +28,13 @@ jobs:
         run: |
           curl -L -vX POST https://dtrack.datatactics.dev/api/v1/bom \
             -H 'Content-Type: multipart/form-data' \
-            -H "X-API-Key: odt_531QuhvvwhYG6cywF2MtzNhNJ5o4oTQR" \
+            -H "X-API-Key: ${{ secrets.DTRACK_API_KEY }}" \
             -F "autoCreate=true" \
             -F "projectName=${IMAGE}" \
             -F "projectVersion=${TAG}" \
             -F "parentUUID=${PARENTUUID}" \
             -F "bom=@dependency-results.sbom.json"
         env:
-          IMAGE: 'datatactics/playground'
-          TAG: 'main'
+          IMAGE: 'dt/playground'
+          TAG: 'latest'
           PARENTUUID: "484f553b-1a01-41f2-922f-96af4e8b73c2"
