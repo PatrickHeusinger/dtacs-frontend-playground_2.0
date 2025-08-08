@@ -1,4 +1,4 @@
-name: FTP Upload via sftp with sshpass
+name: Build & FTP Upload via sftp with sshpass
 
 on:
   push:
@@ -6,11 +6,22 @@ on:
       - main
 
 jobs:
-  upload:
+  build-and-upload:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'  # Oder deine Node-Version
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
 
       - name: Install sshpass
         run: sudo apt-get update && sudo apt-get install -y sshpass
@@ -20,21 +31,21 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan -H ssh.strato.de >> ~/.ssh/known_hosts
 
-      - name: Upload files to SFTP Server
+      - name: Upload dist to SFTP Server
         env:
           FTP_USER: ${{ secrets.FTP_USERNAME }}
           FTP_PASS: ${{ secrets.FTP_PASSWORD }}
           FTP_SERVER: ssh.strato.de
-          LOCAL_DIR: "./test/"
-          REMOTE_DIR: "/webapp/public"
+          LOCAL_DIR: "./dist"
+          REMOTE_DIR: "/test"
         run: |
           echo "Remote-Verzeichnis Listing:"
           sshpass -p "$FTP_PASS" sftp -v "$FTP_USER@$FTP_SERVER" <<EOF
           ls $REMOTE_DIR
           bye
           EOF
-          
-          echo "Beginne Upload von $LOCAL_DIR nach $REMOTE_DIR..."
+
+          echo "Beginne Upload von Inhalt $LOCAL_DIR nach $REMOTE_DIR..."
           sshpass -p "$FTP_PASS" sftp -v "$FTP_USER@$FTP_SERVER" <<EOF
           lcd $LOCAL_DIR
           cd $REMOTE_DIR
