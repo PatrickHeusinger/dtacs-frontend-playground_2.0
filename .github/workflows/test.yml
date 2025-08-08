@@ -25,7 +25,7 @@ jobs:
           FTP_USER: ${{ secrets.FTP_USERNAME }}
           FTP_PASS: ${{ secrets.FTP_PASSWORD }}
           FTP_SERVER: ssh.strato.de
-          LOCAL_DIR: "./test/"
+          LOCAL_DIR: "./ftp_test/"
           REMOTE_DIR: "/webapp/public/"
         run: |
           echo "Remote-Verzeichnis Listing:"
