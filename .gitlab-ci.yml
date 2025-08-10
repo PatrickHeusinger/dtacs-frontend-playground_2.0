@@ -1,6 +1,5 @@
 stages:
   - build
-  - sbom
   - upload
 
 variables:
@@ -10,31 +9,25 @@ variables:
   DOCKER_HOST: tcp://docker:2375
   DOCKER_TLS_CERTDIR: ""
 
-build-docker:
+build-and-sbom:
   stage: build
   image: docker:24
-  services:
-    - docker:24-dind
-  script:
-    - echo "CI_COMMIT_TAG=$CI_COMMIT_TAG"
-    - echo "CI_COMMIT_SHORT_SHA=$CI_COMMIT_SHORT_SHA"
-    - export VERSION=${CI_COMMIT_TAG:-${CI_COMMIT_SHORT_SHA:-latest}}
-    - echo "VERSION=$VERSION"
-    - docker build --build-arg BUILD_HOME=/build --build-arg APP_HOME=/seidr -t $IMAGE_NAME:$VERSION .
-
-generate-sbom:
-  stage: sbom
-  image: aquasec/trivy:latest
   services:
     - docker:24-dind
   variables:
     DOCKER_HOST: tcp://docker:2375
     DOCKER_TLS_CERTDIR: ""
-  dependencies:
-    - build-docker
   script:
+    - export VERSION=${CI_COMMIT_TAG:-${CI_COMMIT_SHORT_SHA:-latest}}
+    - echo "Building image $IMAGE_NAME:$VERSION"
+    - docker build --build-arg BUILD_HOME=/build --build-arg APP_HOME=/seidr -t $IMAGE_NAME:$VERSION .
+    - echo "Installing trivy"
+    - apk add --no-cache curl bash
+    - curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
     - echo "Generating SBOM for $IMAGE_NAME:$VERSION"
     - trivy image --format cyclonedx --output dependency-results.sbom.json $IMAGE_NAME:$VERSION
+    - echo "Removing image to keep environment clean"
+    - docker rmi $IMAGE_NAME:$VERSION
   artifacts:
     paths:
       - dependency-results.sbom.json
@@ -46,7 +39,7 @@ upload-sbom:
   stage: upload
   image: curlimages/curl:latest
   dependencies:
-    - generate-sbom
+    - build-and-sbom
   script:
     - echo "Uploading SBOM to Dependency-Track..."
     - |
