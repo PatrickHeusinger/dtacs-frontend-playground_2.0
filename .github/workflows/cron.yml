@@ -1,0 +1,14 @@
+name: Cron & Manuell Trigger
+
+on:
+  schedule:
+    - cron: '0 2 * * *'    # Täglich 2:00 Uhr UTC
+    - cron: '30 14 * * 1'  # Montags 14:30 Uhr UTC
+  workflow_dispatch:        # Manuelles Auslösen
+
+jobs:
+  example-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo Zeit
+        run: echo "Job läuft um $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
