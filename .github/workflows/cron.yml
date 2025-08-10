@@ -11,4 +11,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Echo Zeit
-        run: echo "Job läuft um $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+        run: echo "Job runs at $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
