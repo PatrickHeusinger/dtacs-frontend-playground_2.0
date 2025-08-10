@@ -2,9 +2,9 @@ name: Cron & Manuell Trigger
 
 on:
   schedule:
-    - cron: '0 2 * * *'    # Täglich 2:00 Uhr UTC
-    - cron: '30 14 * * 1'  # Montags 14:30 Uhr UTC
-  workflow_dispatch:        # Manuelles Auslösen
+    - cron: '0 2 * * *'    # runs daily 2:00 UTC
+    - cron: '30 14 * * 1'  # runs monday 14:30 UTC
+  workflow_dispatch:        # runs manually
 
 jobs:
   example-job:
