@@ -13,8 +13,7 @@ RUN apt-get install -y nodejs git openssh-client
 # package.json und package-lock.json kopieren für npm ci
 COPY webapp/package*.json ./
 RUN ls -la && cat package.json
-RUN npm ci
-RUN npm ci
+RUN npm
 
 # Rest der Webapp kopieren
 COPY webapp .
