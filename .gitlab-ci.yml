@@ -8,6 +8,7 @@ variables:
   DOCKER_DRIVER: overlay2
   # Version aus Git-Tag, sonst Commit-Hash
   VERSION: ${CI_COMMIT_TAG:-${CI_COMMIT_SHORT_SHA}}
+  PARENT_UUID: 484f553b-1a01-41f2-922f-96af4e8b73c2
 
 build-docker:
   stage: build
@@ -35,7 +36,7 @@ upload-sbom:
   script:
     - echo "Uploading SBOM to Dependency-Track..."
     - |
-      curl -L -X POST "$DTRACK_URL/api/v1/bom" \
+      curl -L -X POST "https://dtrack.datatactics.dev/api/v1/bom" \
         -H 'Content-Type: multipart/form-data' \
         -H "X-API-Key: $DTRACK_API_KEY" \
         -F "autoCreate=true" \
