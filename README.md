@@ -1,4 +1,4 @@
-# dtacs-frontend-playground_2.0
+# dtacs-playground
 
 ### Features:
 * React Frontend
@@ -10,3 +10,4 @@
 * CSV File Upload
 * Node.JS Server 
 * React Flow Example
+
