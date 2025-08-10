@@ -11,5 +11,5 @@ jobs:
   example-job:
     runs-on: ubuntu-latest
     steps:
-      - name: Echo Zeit
+      - name: Echo Timestamp
         run: echo "Job runs at $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
