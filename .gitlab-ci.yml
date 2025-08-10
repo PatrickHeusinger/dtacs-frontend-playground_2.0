@@ -1,0 +1,49 @@
+stages:
+  - build
+  - sbom
+  - upload
+
+variables:
+  IMAGE_NAME: my-app
+  DOCKER_DRIVER: overlay2
+  # Version aus Git-Tag, sonst Commit-Hash
+  VERSION: ${CI_COMMIT_TAG:-${CI_COMMIT_SHORT_SHA}}
+
+build-docker:
+  stage: build
+  image: docker:24
+  services:
+    - docker:24-dind
+  script:
+    - echo "Building image $IMAGE_NAME:$VERSION"
+    - docker build -t $IMAGE_NAME:$VERSION .
+
+generate-sbom:
+  stage: sbom
+  image: aquasec/trivy:latest
+  script:
+    - echo "Generating SBOM for $IMAGE_NAME:$VERSION"
+    - trivy image --format cyclonedx --output dependency-results.sbom.json $IMAGE_NAME:$VERSION
+  artifacts:
+    paths:
+      - dependency-results.sbom.json
+    expire_in: 1 week
+
+upload-sbom:
+  stage: upload
+  image: curlimages/curl:latest
+  script:
+    - echo "Uploading SBOM to Dependency-Track..."
+    - |
+      curl -L -X POST "$DTRACK_URL/api/v1/bom" \
+        -H 'Content-Type: multipart/form-data' \
+        -H "X-API-Key: $DTRACK_API_KEY" \
+        -F "autoCreate=true" \
+        -F "projectName=$IMAGE_NAME" \
+        -F "projectVersion=$VERSION" \
+        -F "parentUUID=$PARENT_UUID" \
+        -F "bom=@dependency-results.sbom.json"
+  dependencies:
+    - generate-sbom
+  only:
+    - main
