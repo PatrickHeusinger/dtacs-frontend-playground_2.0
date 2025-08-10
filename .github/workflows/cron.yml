@@ -2,8 +2,8 @@ name: Cron Test Workflow
 
 on:
   schedule:
-    - cron: '* * * * *'    # runs every minute
-  workflow_dispatch:        # runs manually
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
 
 jobs:
   example-job:
