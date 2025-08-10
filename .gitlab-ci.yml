@@ -26,6 +26,8 @@ build-and-sbom:
     - curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
     - echo "Generating SBOM for $IMAGE_NAME:$VERSION"
     - trivy image --format cyclonedx --output dependency-results.sbom.json $IMAGE_NAME:$VERSION
+    - echo "SBOM --------------------------------------------------------- "
+    - cat dependency-results.sbom.json
     - echo "Removing image to keep environment clean"
     - docker rmi $IMAGE_NAME:$VERSION
   artifacts:
