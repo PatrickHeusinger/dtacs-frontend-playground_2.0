@@ -22,16 +22,16 @@ build-docker:
 
 generate-sbom:
   stage: sbom
-  image: aquasec/trivy:latest
+  image: aquasecurity/trivy-action:0.28.0
   script:
     - export VERSION=${CI_COMMIT_TAG:-$CI_COMMIT_SHORT_SHA}
-    - echo "IMAGE_NAME=$IMAGE_NAME"
-    - echo "VERSION=$VERSION"
+    - echo "Generating SBOM for $IMAGE_NAME:$VERSION"
     - trivy image --format cyclonedx --output dependency-results.sbom.json $IMAGE_NAME:$VERSION
   artifacts:
     paths:
       - dependency-results.sbom.json
     expire_in: 1 week
+
 
 upload-sbom:
   stage: upload
