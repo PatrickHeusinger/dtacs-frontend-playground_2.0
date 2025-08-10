@@ -2,6 +2,7 @@ name: Cron & Manuell Trigger
 
 on:
   schedule:
+    - cron: '* * * * *'    # runs every minute
     - cron: '0 2 * * *'    # runs daily 2:00 UTC
     - cron: '30 14 * * 1'  # runs monday 14:30 UTC
   workflow_dispatch:        # runs manually
