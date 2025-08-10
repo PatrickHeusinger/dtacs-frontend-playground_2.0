@@ -16,13 +16,11 @@ build-docker:
   services:
     - docker:24-dind
   script:
-    - echo "Building image $IMAGE_NAME:$VERSION"
+    - echo "CI_COMMIT_TAG=$CI_COMMIT_TAG"
+    - echo "CI_COMMIT_SHORT_SHA=$CI_COMMIT_SHORT_SHA"
+    - export VERSION=${CI_COMMIT_TAG:-${CI_COMMIT_SHORT_SHA:-latest}}
+    - echo "VERSION=$VERSION"
     - docker build --build-arg BUILD_HOME=/build --build-arg APP_HOME=/seidr -t $IMAGE_NAME:$VERSION .
-  artifacts:
-  # Optional: falls du das Image exportieren willst, aber meist nicht nötig
-  # - save image as tar (meist kein use case hier)
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "main" || $CI_COMMIT_TAG'
 
 generate-sbom:
   stage: sbom
