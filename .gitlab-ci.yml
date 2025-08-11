@@ -25,7 +25,7 @@ build-and-sbom:
     - apk add --no-cache curl bash
     - curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
     - echo "Generating SBOM for $IMAGE_NAME:$VERSION"
-    - trivy image --scanners sbom --format cyclonedx --output dependency-results.sbom.json $IMAGE_NAME:$VERSION
+    - trivy image --format cyclonedx --output dependency-results.sbom.json $IMAGE_NAME:$VERSION
     - echo "SBOM Output:" "
     - cat dependency-results.sbom.json
     - echo "Removing image to keep environment clean"
