@@ -27,7 +27,7 @@ build-and-sbom:
     - echo "Generating SBOM for $IMAGE_NAME:$VERSION"
     - trivy image --format cyclonedx --output dependency-results $IMAGE_NAME:$VERSION
     - echo "SBOM Output:"
-    - cat dependency-results.sbom.json
+    - cat dependency-results
     - echo "Removing image to keep environment clean"
     - docker rmi $IMAGE_NAME:$VERSION
   artifacts:
