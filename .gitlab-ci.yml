@@ -21,13 +21,20 @@ build-and-sbom:
     - export VERSION=${CI_COMMIT_TAG:-${CI_COMMIT_SHORT_SHA:-latest}}
     - echo "Building image $IMAGE_NAME:$VERSION"
     - docker build --build-arg BUILD_HOME=/build --build-arg APP_HOME=/seidr -t $IMAGE_NAME:$VERSION .
-    - echo "Installing trivy"
+
+    # Install Trivy
     - apk add --no-cache curl bash
     - curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
+
+    # SBOM erstellen
     - echo "Generating SBOM for $IMAGE_NAME:$VERSION"
     - trivy image --format cyclonedx --output dependency-results $IMAGE_NAME:$VERSION
-    - echo "SBOM Output:"
     - cat dependency-results
+
+    # Vulnerability Scan
+    - echo "Running vulnerability scan on $IMAGE_NAME:$VERSION"
+    - trivy image --exit-code 1 --severity HIGH,CRITICAL --ignore-unfixed $IMAGE_NAME:$VERSION
+
     - echo "Removing image to keep environment clean"
     - docker rmi $IMAGE_NAME:$VERSION
   artifacts:
