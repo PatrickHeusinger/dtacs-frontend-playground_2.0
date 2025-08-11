@@ -45,12 +45,14 @@ upload-sbom:
   dependencies:
     - build-and-sbom
   script:
-    - echo "Uploading SBOM to Dependency-Track..."
-    - |
-      curl -L -X PUT "https://dtrack.datatactics.dev/api/v1/bom" \
-      -H "Content-Type: application/json" \
+  - echo "Uploading SBOM to Dependency-Track..."
+  - |
+    curl -L -X POST "https://dtrack.datatactics.dev/api/v1/bom" \
       -H "X-API-Key: $DTRACK_API_KEY" \
-      -d "{\"projectName\":\"$IMAGE_NAME\",\"projectVersion\":\"$VERSION\",\"autoCreate\":true,\"parentUUID\":\"$PARENT_UUID\",\"bom\":\"$(cat dependency-results | base64 -w 0)\"}"
-
+      -F "autoCreate=true" \
+      -F "projectName=$IMAGE_NAME" \
+      -F "projectVersion=$VERSION" \
+      -F "parentUUID=$PARENT_UUID" \
+      -F "bom=@dependency-results;type=application/json"
   rules:
     - if: '$CI_COMMIT_BRANCH == "main" || $CI_COMMIT_TAG'
