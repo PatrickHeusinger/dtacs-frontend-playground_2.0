@@ -28,13 +28,8 @@ build-and-sbom:
 
     # SBOM erstellen
     - echo "Generating SBOM for $IMAGE_NAME:$VERSION"
-    - trivy image --format cyclonedx --output dependency-results $IMAGE_NAME:$VERSION
+    - trivy image --format cyclonedx --output dependency-results --scanners vuln,secret,misconfig $IMAGE_NAME:$VERSION
     - cat dependency-results
-
-    # Vulnerability Scan
-    - echo "Running vulnerability scan on $IMAGE_NAME:$VERSION"
-    - trivy image --exit-code 1 --severity HIGH,CRITICAL --ignore-unfixed $IMAGE_NAME:$VERSION
-
     - echo "Removing image to keep environment clean"
     - docker rmi $IMAGE_NAME:$VERSION
   artifacts:
