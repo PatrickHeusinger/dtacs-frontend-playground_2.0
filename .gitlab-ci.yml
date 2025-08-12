@@ -43,7 +43,8 @@ upload-sbom:
   dependencies:
     - build-and-sbom
   script:
-    - echo "Uploading SBOM to Dependency-Track..."
+    - echo "Uploading SBOM to DTrack"
+    - cat dependency-results.sbom.json
     - |
       curl -L -X POST "https://dtrack.datatactics.dev/api/v1/bom" \
         -H 'Content-Type: multipart/form-data' \
