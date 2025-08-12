@@ -38,5 +38,5 @@ jobs:
             -F "bom=@dependency-results.sbom.json"
         env:
           IMAGE: 'dt/playground'
-          TAG: '${{ github.short_sha }}'
+          TAG: '${{ github.run_number }}'
           PARENTUUID: ${{ secrets.PARENT_UUID }}
